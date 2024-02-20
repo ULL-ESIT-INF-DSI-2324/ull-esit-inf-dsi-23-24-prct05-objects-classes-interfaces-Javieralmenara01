@@ -13,6 +13,7 @@ export class TrabajoFinGrado extends ElementoBibliografico {
    * @param fechaPublicacion Fecha de publicación del trabajo de final de grado.
    * @param paginas Páginas del trabajo de final de grado.
    * @param editorial Editorial del trabajo de final de grado.
+   * @param grado Grado al que pertenece el trabajo final.
    */
   constructor(
     titulo: string,
@@ -21,7 +22,8 @@ export class TrabajoFinGrado extends ElementoBibliografico {
     resumen: string,
     fechaPublicacion: Date,
     paginas: string,
-    editorial: string
+    editorial: string,
+    public readonly grado: string
   ) {
     super(titulo, autor, palabrasClave, resumen, fechaPublicacion, paginas, editorial);
   }

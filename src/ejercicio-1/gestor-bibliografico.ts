@@ -61,8 +61,6 @@ export class GestorBibliografico {
    * Filtra los elementos bibliográficos según una clave de búsqueda y un campo opcional.
    * @param claveBusqueda Clave de búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
-   * @param exportar Indica si se deben exportar los resultados en formato IEEE.
-   * @param ficheroSalida Nombre del archivo de salida para la exportación.
    * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
    * @usage
    * ```typescript
@@ -100,8 +98,6 @@ export class GestorBibliografico {
    * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
    * @param claveBusqueda Expresión regular para la búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
-   * @param exportar Indica si se deben exportar los resultados en formato IEEE.
-   * @param ficheroSalida Nombre del archivo de salida para la exportación.
    * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
    * @usage
    * ```typescript

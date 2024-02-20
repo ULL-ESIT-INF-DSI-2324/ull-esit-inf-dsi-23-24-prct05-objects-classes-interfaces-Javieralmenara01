@@ -78,7 +78,7 @@ export class Nevera {
 
   /**
    * Extrae elementos a la nevera
-   * @param nombreElemento: nombre elemento a coger
+   * @param nombreElemento Nombre elemento a coger
    */
   cogerElemento(nombreElemento: string) {
     this.listaAlimentos.forEach(element => {

@@ -63,7 +63,8 @@ describe('GestorBibliografico', () => {
         'A comprehensive study of various ML algorithms.',
         new Date(2020, 4, 20),
         '80',
-        'University Press'
+        'University Press',
+        'Mathematics Degree'
       ),
       new TrabajoFinMaster(
         'Blockchain Applications',
@@ -72,7 +73,8 @@ describe('GestorBibliografico', () => {
         'Exploring the potential applications of blockchain technology.',
         new Date(2021, 6, 10),
         '120',
-        'Blockchain Institute'
+        'Blockchain Institute',
+        'Master in Computer Engineering'
       )
     ];
 

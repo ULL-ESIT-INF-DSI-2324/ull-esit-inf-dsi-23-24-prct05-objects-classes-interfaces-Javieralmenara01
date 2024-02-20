@@ -11,7 +11,8 @@ describe('TrabajoFinMaster', () => {
           'Resumen del trabajo de fin de máster',
           new Date(),
           '110-120',
-          'Editorial'
+          'Editorial',
+          'Titulo del Máster'
       );
       const expected = 'Autor 1, Autor 2, "Título del trabajo de fin de máster", Editorial, ' + new Date().getFullYear() + ', pp. 110-120';
       expect(trabajo.toIEEEFormat()).to.equal(expected);

@@ -40,7 +40,7 @@ export enum alergenos {
 
 /**
  * Getallergens. Dada una puntuación podemos obtener una lista de alérgenos de la persona
- * @param puntuacion: puntaación del alergeno
+ * @param puntuacion Puntuación del alergeno
  * @returns La lista de alérgenos
  */
 export function getAllergens(puntuacion: number): string[] | undefined {

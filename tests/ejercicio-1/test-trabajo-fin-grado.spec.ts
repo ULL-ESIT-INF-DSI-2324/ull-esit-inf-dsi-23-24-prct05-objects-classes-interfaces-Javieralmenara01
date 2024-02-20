@@ -11,7 +11,8 @@ describe('TrabajoFinGrado', () => {
           'Resumen del trabajo de fin de grado',
           new Date(),
           '90-100',
-          'Editorial'
+          'Editorial',
+          'Titulo del Grado'
       );
       const expected = 'Autor 1, Autor 2, "Título del trabajo de fin de grado", Editorial, ' + new Date().getFullYear() + ', pp. 90-100';
       expect(trabajo.toIEEEFormat()).to.equal(expected);

@@ -4,11 +4,14 @@ import { Dish } from '../../src/ejercicio-2/menu-instance';
 import { MenuInstance } from '../../src/ejercicio-2/menu-instance';
 import { MenuSolution } from '../../src/ejercicio-2/menu-solution';
 import { Solver } from '../../src/ejercicio-2/solver'
+import { FirstHeuristic } from '../../src/ejercicio-2/first-heuristic'
+import { SecondHeuristic } from '../../src/ejercicio-2/second-heuristic'
+import { ThirdHeuristic } from '../../src/ejercicio-2/third-heuristic'
+
 
 describe('Solver', () => {
   describe('getSolution', () => {
-    it('should return three MenuSolution objects', () => {
-      // Arrange
+    it('should return one MenuSolution object', () => {
       const dishes: Dish[] = [
         { nutritionalScore: 10, unhealthinessScore: 5 },
         { nutritionalScore: 8, unhealthinessScore: 4 },
@@ -16,16 +19,10 @@ describe('Solver', () => {
       ];
       const maxUnhealthinessScore = 10;
       const menu = new MenuInstance(dishes, maxUnhealthinessScore);
-      const solver = new Solver(menu);
+      const solver = new Solver(menu, new FirstHeuristic());
 
-      // Act
-      const solutions = solver.getSolution();
-
-      // Assert
-      expect(solutions).to.be.an('array').with.lengthOf(3);
-      solutions.forEach(solution => {
-        expect(solution).to.be.an.instanceOf(MenuSolution);
-      });
+      const solution = solver.getSolution();
+      expect(solution).to.be.an.instanceOf(MenuSolution);
     });
 
     it('should return solutions based on different heuristics', () => {
@@ -37,18 +34,18 @@ describe('Solver', () => {
       ];
       const maxUnhealthinessScore = 10;
       const menu = new MenuInstance(dishes, maxUnhealthinessScore);
-      const solver = new Solver(menu);
+      const solver = new Solver(menu, new FirstHeuristic());
+      let solution = solver.getSolution();
 
-      // Act
-      const solutions = solver.getSolution();
+      expect(solution.listDishesSolution).to.be.deep.equal([true, true, false]);
+      
+      solver.setHeuristic(new SecondHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.be.deep.equal([false, true, true]);
 
-      // Assert
-      // First solution: Sort dishes by nutritional score descendingly
-      // Second solution: Sort dishes by unhealthiness score ascendingly
-      // Third solution: Sort dishes by nutritional/unhealthiness ratio descendingly
-      expect(solutions[0].listDishesSolution).to.deep.equal([true, true, false]);
-      expect(solutions[1].listDishesSolution).to.deep.equal([false, true, true]);
-      expect(solutions[2].listDishesSolution).to.deep.equal([true, true, false]);
+      solver.setHeuristic(new ThirdHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.be.deep.equal([true, true, false]);
     });
 
     it('should return an empty solution if no dishes fit the max unhealthiness score', () => {
@@ -60,31 +57,34 @@ describe('Solver', () => {
       ];
       const maxUnhealthinessScore = 0;
       const menu = new MenuInstance(dishes, maxUnhealthinessScore);
-      const solver = new Solver(menu);
+      const solver = new Solver(menu, new FirstHeuristic());
+      let solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([false, false, false]);
+      
+      solver.setHeuristic(new SecondHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([false, false, false]);
 
-      // Act
-      const solutions = solver.getSolution();
-
-      // Assert
-      expect(solutions[0].listDishesSolution).to.deep.equal([false, false, false]);
-      expect(solutions[1].listDishesSolution).to.deep.equal([false, false, false]);
-      expect(solutions[2].listDishesSolution).to.deep.equal([false, false, false]);
+      solver.setHeuristic(new ThirdHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([false, false, false]);
     });
 
     it('should handle edge cases with empty menu', () => {
-      // Arrange
       const dishes: Dish[] = [];
       const maxUnhealthinessScore = 10;
       const menu = new MenuInstance(dishes, maxUnhealthinessScore);
-      const solver = new Solver(menu);
+      const solver = new Solver(menu, new FirstHeuristic());
+      let solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([]);
 
-      // Act
-      const solutions = solver.getSolution();
+      solver.setHeuristic(new SecondHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([]);
 
-      // Assert
-      expect(solutions[0].listDishesSolution).to.deep.equal([]);
-      expect(solutions[1].listDishesSolution).to.deep.equal([]);
-      expect(solutions[2].listDishesSolution).to.deep.equal([]);
+      solver.setHeuristic(new ThirdHeuristic());
+      solution = solver.getSolution();
+      expect(solution.listDishesSolution).to.deep.equal([]);
     });
   });
 });

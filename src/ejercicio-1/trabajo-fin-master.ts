@@ -13,6 +13,7 @@ export class TrabajoFinMaster extends ElementoBibliografico {
    * @param fechaPublicacion Fecha de publicación del trabajo de final de master.
    * @param paginas Páginas del trabajo de final de master.
    * @param editorial Editorial del trabajo de final de master.
+   * @param master Master al que pertenece el trabajo final.
    */
   constructor(
     titulo: string,
@@ -21,7 +22,8 @@ export class TrabajoFinMaster extends ElementoBibliografico {
     resumen: string,
     fechaPublicacion: Date,
     paginas: string,
-    editorial: string
+    editorial: string,
+    public readonly master: string 
   ) {
     super(titulo, autor, palabrasClave, resumen, fechaPublicacion, paginas, editorial);
   }
