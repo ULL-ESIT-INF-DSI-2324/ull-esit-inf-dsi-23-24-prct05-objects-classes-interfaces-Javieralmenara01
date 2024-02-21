@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "coverage": "nyc npm test",
     "doc": "typedoc"
   },
   "keywords": [],
@@ -14,7 +15,9 @@
     "@types/chai": "^4.3.11",
     "@types/mocha": "^10.0.6",
     "chai": "^4.4.1",
+    "coveralls": "^3.1.1",
     "mocha": "^10.3.0",
+    "nyc": "^15.1.0",
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.0.4",
     "typedoc": "^0.25.8"
