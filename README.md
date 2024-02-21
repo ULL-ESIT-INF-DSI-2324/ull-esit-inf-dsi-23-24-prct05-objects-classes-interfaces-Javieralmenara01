@@ -13,19 +13,17 @@
 ### **Introducción**
 En la práctica actual, se espera que se profundice en la comprensión y aplicación de los conceptos de objetos, clases e interfaces en TypeScript. A través de ejercicios de programación, se busca desarrollar habilidades prácticas en la implementación de estos conceptos. 
 
-Se solicita al estudiante resolver problemas, crear pruebas mediante la metodología TDD, así como documentar las soluciones. Se recomienda familiarizarse con los principios SOLID y herramientas como Instanbul y Coveralls para evaluación del código y pruebas, aunque su uso no es obligatorio en esta práctica.
+Se solicita resolver problemas, crear pruebas mediante la metodología TDD, así como documentar las soluciones. Se recomienda familiarizarse con los principios SOLID y herramientas como Instanbul y Coveralls para evaluación del código y pruebas.
 
 ### **Ejercicios**
 #### Ejercicio 1 - Gestor de referencias bibliográficas
-Se propone el diseño e implementación de un sistema capaz de gestionar información bibliográfica diversa. En respuesta a este requerimiento, se han diseñado clases que permiten representar elementos bibliográficos y cumplir con la funcionalidad especificada.
+Para el ejercicio 1, se propone el diseño e implementación de un sistema capaz de gestionar información bibliográfica diversa. En respuesta a este requerimiento, se han diseñado clases que permiten representar elementos bibliográficos y cumplir con la funcionalidad especificada.
 
-Se ha creado una clase abstracta denominada "ElementoBibliografico" que encapsula los atributos comunes de todos los elementos, como título, autores, palabras clave, resumen, fecha de publicación, páginas y editorial. A partir de esta clase base, se han definido clases concretas para tipos específicos de elementos bibliográficos, como "ArticuloRevista", "ContribucionCongreso", "CapituloLibro", "Libro", "TrabajoFinGrado" y "TrabajoFinMaster".
+Se ha creado una clase abstracta denominada "ElementoBibliografico" que encapsula los atributos comunes de todos los elementos, como título, autores, palabras clave, resumen, fecha de publicación, páginas y editorial. En esta clase abstracta se ha definido un método abstracto, que deberá implementarse en clases derivadas. A partir de esta clase base, se han definido clases concretas para tipos específicos de elementos bibliográficos, como "ArticuloRevista", "ContribucionCongreso", "CapituloLibro", "Libro", "TrabajoFinGrado" y "TrabajoFinMaster".
 
 Cada clase concreta implementa su propio método para generar una referencia en formato IEEE, adaptado a las peculiaridades de cada tipo de elemento. Además, se ha incorporado un método en el gestor bibliográfico para realizar búsquedas por palabras clave y filtrar los resultados por diversos criterios, como título, autores, fecha de publicación y editorial. También se ha provisto una función para exportar los resultados de búsqueda en formato IEEE.
 
 Para evaluar el funcionamiento del gestor bibliográfico, se han proporcionado ejemplos representativos de diferentes tipos de elementos bibliográficos, que abarcan desde artículos de revista hasta trabajos de fin de grado y máster. Estos ejemplos permiten probar la capacidad del sistema para manejar una variedad de datos bibliográficos y generar referencias en formato IEEE de manera precisa.
-
-Finalmente, se plantea la comparación del gestor bibliográfico desarrollado con herramientas similares como Zotero o Mendeley, con el objetivo de evaluar su rendimiento y funcionalidades frente a soluciones existentes en el mercado. Esta comparación proporcionará información valiosa sobre la eficacia y utilidad del gestor bibliográfico implementado en este ejercicio.
 
 **Clase Abstracta ElementoBibliográfico**
 ```typescript
@@ -868,7 +866,7 @@ Se utilizan buenas prácticas de programación orientada a objetos y se proporci
 ### **Conclusiones**
 En conclusión, el enfoque riguroso y la aplicación práctica de los conceptos de objetos, clases e interfaces en TypeScript durante esta práctica proporcionan una base sólida para abordar con confianza los desafíos venideros en el desarrollo de software. La combinación de nuevas herramientas y la profundización en la comprensión de estas estructuras fundamentales contribuyen significativamente al crecimiento profesional y la capacidad para enfrentar proyectos futuros con éxito.
 
-### **Un paso más allá**
+### **Profundizando**
 El desarrollo de este sistema para encontrar soluciones de menús saludables se ha llevado a cabo siguiendo una metodología de desarrollo dirigida por pruebas (TDD) y adoptando principios de diseño limpio y modular. Se ha utilizado el patrón de comportamiento Strategy para implementar diferentes estrategias de comparación de platos, lo que permite una fácil extensión y mantenimiento del código. Además, se ha documentado exhaustivamente el código utilizando TypeDoc, asegurando una comprensión clara de la estructura y funcionalidad del sistema. En cuanto a las pruebas, se han desarrollado pruebas unitarias que confirman el correcto funcionamiento del código en escenarios normales, así como pruebas adicionales para garantizar que el software maneje adecuadamente entradas no válidas o inesperadas, cumpliendo así con el principio de que "los errores nunca deben pasar silenciosamente". Este enfoque garantiza la calidad y fiabilidad del sistema, así como su capacidad para adaptarse a futuros cambios y requisitos.
 
 ### **Referencias**
