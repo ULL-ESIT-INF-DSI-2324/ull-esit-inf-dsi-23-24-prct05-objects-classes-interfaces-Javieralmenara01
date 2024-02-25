@@ -81,7 +81,7 @@ describe('GestorBibliografico', () => {
     gestor = new GestorBibliografico(elementos);
   });
 
-  describe('#filtrar', () => {
+  describe('#filtrarIEEE', () => {
     it('should filter elements by title', () => {
       const resultado = gestor.filtrar('Clean Code', 'titulo');
       expect(resultado).to.contain('Clean Code');
@@ -104,7 +104,7 @@ describe('GestorBibliografico', () => {
     });
   });
 
-  describe('#filtrarExpresion', () => {
+  describe('#filtrarExpresionIEEE', () => {
     it('should filter elements by regular expression on title', () => {
       const resultado = gestor.filtrarExpresion(/Code/, 'titulo');
       expect(resultado).to.contain('Clean Code');

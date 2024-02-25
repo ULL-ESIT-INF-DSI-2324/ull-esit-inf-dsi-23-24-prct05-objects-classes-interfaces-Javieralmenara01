@@ -61,13 +61,13 @@ export class GestorBibliografico {
    * Filtra los elementos bibliográficos según una clave de búsqueda y un campo opcional.
    * @param claveBusqueda Clave de búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
-   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
+   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda, en formato IEEE.
    * @usage
    * ```typescript
    * const resultados = gestor.filtrar("Título");
    * ```
    */
-  filtrar(claveBusqueda: string, campoBusqueda?: string): string {
+  filtrarIEEE(claveBusqueda: string, campoBusqueda?: string): string {
     let resultadosBusqueda: ElementoBibliografico[] = [];
     this.elementos.forEach(elemento => {
       let coincidencia: boolean = false;
@@ -90,7 +90,10 @@ export class GestorBibliografico {
         resultadosBusqueda.push(elemento);
       }
     });
-    const datosExportar: string = resultadosBusqueda.map(elemento => { return elemento.toIEEEFormat() }).join(`\n`);
+    let datosExportar: string = "";
+    if (resultadosBusqueda.length > 0) {
+      datosExportar = resultadosBusqueda.map(elemento => { return elemento.toIEEEFormat() }).join(`\n`);
+    }
     return datosExportar;
   }
   
@@ -98,13 +101,13 @@ export class GestorBibliografico {
    * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
    * @param claveBusqueda Expresión regular para la búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
-   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
+   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda, en formato IEEE.
    * @usage
    * ```typescript
-   * const resultados = gestor.filtrarExpresion(/Título/);
+   * const resultados = gestor.filtrarExpresionIEEE(/Título/);
    * ```
    */
-  filtrarExpresion(claveBusqueda: RegExp, campoBusqueda?: string): string {
+  filtrarExpresionIEEE(claveBusqueda: RegExp, campoBusqueda?: string): string {
     let resultadosBusqueda: ElementoBibliografico[] = [];
     this.elementos.forEach(elemento => {
       let coincidencia: boolean = false;
@@ -113,12 +116,12 @@ export class GestorBibliografico {
       }
       if (!campoBusqueda || campoBusqueda === 'autor') {
         coincidencia = coincidencia || elemento.autor.some(autorSel => {
-          return claveBusqueda.test(autorSel); // Corregido: Agrega el retorno aquí
+          return claveBusqueda.test(autorSel);
         });
       }
       if (!campoBusqueda || campoBusqueda === 'palabrasClave') {
         coincidencia = coincidencia || elemento.palabrasClave.some(palabra => {
-          return claveBusqueda.test(palabra); // Corregido: Agrega el retorno aquí
+          return claveBusqueda.test(palabra); 
         });
       }
       if (!campoBusqueda || campoBusqueda === 'fechaPublicacion') {
@@ -132,9 +135,91 @@ export class GestorBibliografico {
       }
     });
     let datosExportar: string = "";
-    if (resultadosBusqueda.length > 0) { // Corregido: Verifica si hay resultados
+    if (resultadosBusqueda.length > 0) {
       datosExportar = resultadosBusqueda.map(elemento => { return elemento.toIEEEFormat() }).join(`\n`);
     }
     return datosExportar;
   }  
+
+  /**
+   * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
+   * @param claveBusqueda Clave de búsqueda.
+   * @param campoBusqueda Campo de búsqueda opcional.
+   * @usage
+   * ```typescript
+   * gestor.filtrar("Título", 'titulo');
+   * ```
+   */
+  filtrar(claveBusqueda: string, campoBusqueda?: string): undefined {
+    let resultadosBusqueda: ElementoBibliografico[] = [];
+    this.elementos.forEach(elemento => {
+      let coincidencia: boolean = false;
+      if (!campoBusqueda || campoBusqueda === 'titulo') {
+        coincidencia = coincidencia || elemento.titulo.includes(claveBusqueda);
+      }
+      if (!campoBusqueda || campoBusqueda === 'autor') {
+        coincidencia = coincidencia || elemento.autor.some(autor => autor.includes(claveBusqueda));
+      }
+      if (!campoBusqueda || campoBusqueda === 'palabrasClave') {
+        coincidencia = coincidencia || elemento.palabrasClave.includes(claveBusqueda);
+      }
+      if (!campoBusqueda || campoBusqueda === 'fechaPublicacion') {
+        coincidencia = coincidencia || elemento.fechaPublicacion.toString().includes(claveBusqueda);
+      }
+      if (!campoBusqueda || campoBusqueda === 'editorial') {
+        coincidencia = coincidencia || elemento.editorial.includes(claveBusqueda);
+      }
+      if (coincidencia) {
+        resultadosBusqueda.push(elemento);
+      }
+    });
+    if (resultadosBusqueda) {
+      this.mostrarInformacion(resultadosBusqueda);
+    } else {
+      console.log(`No se ha encontrado información!`);
+    }
+  }
+
+  /**
+   * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
+   * @param claveBusqueda Expresión regular para la búsqueda.
+   * @param campoBusqueda Campo de búsqueda opcional.
+   * @usage
+   * ```typescript
+   * gestor.filtrarExpresion(/Título/);
+   * ```
+   */
+  filtrarExpresion(claveBusqueda: RegExp, campoBusqueda?: string): undefined {
+    let resultadosBusqueda: ElementoBibliografico[] = [];
+    this.elementos.forEach(elemento => {
+      let coincidencia: boolean = false;
+      if (!campoBusqueda || campoBusqueda === 'titulo') {
+        coincidencia = coincidencia || claveBusqueda.test(elemento.titulo);
+      }
+      if (!campoBusqueda || campoBusqueda === 'autor') {
+        coincidencia = coincidencia || elemento.autor.some(autorSel => {
+          return claveBusqueda.test(autorSel);
+        });
+      }
+      if (!campoBusqueda || campoBusqueda === 'palabrasClave') {
+        coincidencia = coincidencia || elemento.palabrasClave.some(palabra => {
+          return claveBusqueda.test(palabra); 
+        });
+      }
+      if (!campoBusqueda || campoBusqueda === 'fechaPublicacion') {
+        coincidencia = coincidencia || claveBusqueda.test(elemento.fechaPublicacion.toString());
+      }
+      if (!campoBusqueda || campoBusqueda === 'editorial') {
+        coincidencia = coincidencia || claveBusqueda.test(elemento.editorial);
+      }
+      if (coincidencia) {
+        resultadosBusqueda.push(elemento);
+      }
+    });
+    if (resultadosBusqueda) {
+      this.mostrarInformacion(resultadosBusqueda);
+    } else {
+      console.log(`No se ha encontrado información!`);
+    }
+  } 
 }
