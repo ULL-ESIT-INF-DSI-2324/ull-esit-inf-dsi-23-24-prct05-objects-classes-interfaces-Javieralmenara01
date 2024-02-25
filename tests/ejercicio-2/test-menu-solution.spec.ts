@@ -4,12 +4,25 @@ import { Dish } from '../../src/ejercicio-2/menu-instance';
 import { MenuSolution } from '../../src/ejercicio-2/menu-solution';
 
 describe('MenuSolution', () => {
-  describe('constructor', () => {
-    it('should create a MenuSolution object', () => {
-      const dishesSolution = [true, false, true];
-      const solution = new MenuSolution(dishesSolution);
-      expect(solution).to.be.an.instanceOf(MenuSolution);
-      expect(solution.listDishesSolution).to.deep.equal(dishesSolution);
+  let solution: MenuSolution;
+  const initialDishesSolution: boolean[] = [true, false, true];
+
+  beforeEach(() => {
+    solution = new MenuSolution(initialDishesSolution);
+  });
+
+  describe('#setSolution', () => {
+    it('should set the solution for a specific dish in the menu', () => {
+      const index = 1;
+      const newValue = true;
+      solution.setSolution(index, newValue);
+      expect(solution.listDishesSolution[index]).to.equal(newValue);
+    });
+  });
+
+  describe('#getlistDishesSolution', () => {
+    it('should return the list of solutions for the dishes in the menu', () => {
+      expect(solution.getlistDishesSolution()).to.deep.equal(initialDishesSolution);
     });
   });
 });

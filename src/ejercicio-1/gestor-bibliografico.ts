@@ -23,6 +23,14 @@ export class GestorBibliografico {
     /// Constructor
   }
   
+  /**
+   * Getter
+   * @returns La lista de Elementos Bibliograficos que contiene
+   * @usage
+   * ```typescript
+   * let elementos = gestor.getElementos();
+   * ```
+   */
   getElementos(): ElementoBibliografico[] {
     return this.elementos;
   }
@@ -145,12 +153,13 @@ export class GestorBibliografico {
    * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
    * @param claveBusqueda Clave de búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
+   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
    * @usage
    * ```typescript
    * gestor.filtrar("Título", 'titulo');
    * ```
    */
-  filtrar(claveBusqueda: string, campoBusqueda?: string): undefined {
+  filtrar(claveBusqueda: string, campoBusqueda?: string): ElementoBibliografico[] {
     let resultadosBusqueda: ElementoBibliografico[] = [];
     this.elementos.forEach(elemento => {
       let coincidencia: boolean = false;
@@ -178,18 +187,20 @@ export class GestorBibliografico {
     } else {
       console.log(`No se ha encontrado información!`);
     }
+    return resultadosBusqueda;
   }
 
   /**
    * Filtra los elementos bibliográficos según una expresión regular y otros criterios opcionales.
    * @param claveBusqueda Expresión regular para la búsqueda.
    * @param campoBusqueda Campo de búsqueda opcional.
+   * @returns Lista de elementos bibliográficos que coinciden con la búsqueda.
    * @usage
    * ```typescript
    * gestor.filtrarExpresion(/Título/);
    * ```
    */
-  filtrarExpresion(claveBusqueda: RegExp, campoBusqueda?: string): undefined {
+  filtrarExpresion(claveBusqueda: RegExp, campoBusqueda?: string): ElementoBibliografico[] {
     let resultadosBusqueda: ElementoBibliografico[] = [];
     this.elementos.forEach(elemento => {
       let coincidencia: boolean = false;
@@ -221,5 +232,6 @@ export class GestorBibliografico {
     } else {
       console.log(`No se ha encontrado información!`);
     }
+    return resultadosBusqueda;
   } 
 }
